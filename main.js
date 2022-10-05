@@ -11,14 +11,16 @@ const mime = {
 }
 
 const servidor = http.createServer((pedido, respuesta) => {
-  const url = new URL('http://localhost:8088' + pedido.url)
+  const url = new URL('http://tp74.herokuapp.com/' + pedido.url)
   let camino = 'public' + url.pathname
   if (camino == 'public/')
     camino = 'public/index.html'
   encaminar(pedido, respuesta, camino)
 })
 
-servidor.listen(8888)
+const PORT = process.env.PORT || 8080;
+
+servidor.listen(PORT, () => { console.log('Servidor web iniciado') }) ;
 
 
 function encaminar(pedido, respuesta, camino) {
@@ -94,9 +96,3 @@ function recuperar(pedido, respuesta) {
       respuesta.end()
     })
 }
-
-      
-
-
-
-    
