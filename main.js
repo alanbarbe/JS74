@@ -18,9 +18,11 @@ const servidor = http.createServer((pedido, respuesta) => {
   encaminar(pedido, respuesta, camino)
 })
 
-const PORT = process.env.PORT || 8080;
-
-servidor.listen(PORT, () => { console.log('Servidor web iniciado') }) ;
+var server_port = process.env.YOUR_PORT || process.env.PORT || 8888;
+var server_host = process.env.YOUR_HOST || '0.0.0.0';
+servidor.listen(server_port, server_host, function() {
+console.log('Listening on port %d', server_port);
+});
 
 
 function encaminar(pedido, respuesta, camino) {
