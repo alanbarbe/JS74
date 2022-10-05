@@ -1,5 +1,6 @@
 const http = require('http')
 const fs = require('fs')
+const url = require('url')
 
 const mime = {
   'html': 'text/html',
@@ -11,8 +12,8 @@ const mime = {
 }
 
 const servidor = http.createServer((pedido, respuesta) => {
-  const url = new URL('http://tp74.herokuapp.com/' + pedido.url)
-  let camino = 'public' + url.pathname
+  const objetourl = url.parse(pedido.url)
+  let camino = 'public' + objetourl.pathname;
   if (camino == 'public/')
     camino = 'public/index.html'
   encaminar(pedido, respuesta, camino)
